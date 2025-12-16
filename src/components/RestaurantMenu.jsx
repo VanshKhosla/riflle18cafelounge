@@ -814,7 +814,7 @@ const menuItems = [
     name: "Cheese Tomato Chilli Sandwich",
     category: "Sandwich (Veg)",
     type: "veg",
-    img: "/Images/Cheese-Tomato-Chilli-Sandwich.jpg",
+    img: "/Images/Cheese-Tomato-Chilli-Sandwich.png",
     description: "Cheese, tomato & green chilli sandwich",
     variants: [{ size: "Regular", price: 110 }]
   },
@@ -1870,7 +1870,7 @@ const menuItems = [
     name: "Al-Fredo Chicken Pasta (White Sauce)",
     category: "Pan & Baked Pasta (Non-Veg)",
     type: "nonveg",
-    img: "/Images/Al-Fredo-Chicken-Pasta-White-Sauce.jpg",
+    img: "/Images/Al-Fredo-Chicken-Pasta-White-Sauce.png",
     description: "Classic Alfredo white sauce pasta with chicken",
     variants: [
       { size: "Pan", price: 230 },
