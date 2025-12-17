@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const CATEGORIES = [
   "All", "Add-Ons", "Veg Pizza", "Non Veg Pizza",
@@ -4122,6 +4121,7 @@ export default function RestaurantMenu() {
                   <img
                     src={item.img}
                     alt={item.name}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
 
