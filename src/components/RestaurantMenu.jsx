@@ -36,63 +36,55 @@ function getItemType(category) {
   return "veg";
 }
 
+
+
+
 export default function RestaurantMenu() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
 
-  const [menuItems, setMenuItems] = useState([]);
+  const [allMenuItems, setAllMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 1. Fetch ALL data once on mount
   useEffect(() => {
     setLoading(true);
-    let slug;
-    if (category === "All") {
-      slug = "all";
-    } else {
-      // Slugify logic matching the extraction script
-      slug = category.toLowerCase()
-        .replace(/ /g, '-')
-        .replace(/[()]/g, '')
-        .replace(/&/g, '')
-        .replace(/--/g, '-')
-        .replace(/-$/, '')
-        .replace(/^-/, '');
-    }
-
-    fetch(`/data/${slug}.json`)
+    fetch("/data/all.json")
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
       .then((data) => {
-        setMenuItems(data);
+        setAllMenuItems(data);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Failed to fetch menu:", err);
-        setMenuItems([]);
+        setAllMenuItems([]);
         setLoading(false);
       });
-  }, [category]);
+  }, []);
 
+  // 2. Filter client-side
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
 
-    let items = menuItems.filter((it) => {
-      if (category !== "All" && it.category !== category) return false;
+    // First filter by category
+    let items = allMenuItems;
+    if (category !== "All") {
+      items = items.filter((it) => it.category === category);
+    }
 
-      if (
-        q &&
-        !(it.name.toLowerCase().includes(q) ||
-          it.description.toLowerCase().includes(q))
-      )
-        return false;
-
-      return true;
-    });
+    // Then filter by search query
+    if (q) {
+      items = items.filter((it) =>
+        it.name.toLowerCase().includes(q) ||
+        it.description.toLowerCase().includes(q)
+      );
+    }
 
     return items;
-  }, [query, category, menuItems]);
+  }, [query, category, allMenuItems]);
 
   return (
     <div
