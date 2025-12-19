@@ -41,7 +41,7 @@ function getItemType(category) {
 
 export default function RestaurantMenu() {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState(CATEGORIES[2]);
 
   const [allMenuItems, setAllMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -94,7 +94,7 @@ export default function RestaurantMenu() {
       {/* HEADER */}
       <header className="max-w-6xl mx-auto mb-8 flex items-center gap-4">
         <img
-          src="/Images/logo.png"
+          src="/Images/logo.webp"
           alt="Cafe Logo"
           className="w-14 h-14 rounded-full bg-white p-1 object-contain shadow"
           style={{ border: "2px solid rgba(255,255,255,0.4)" }}
